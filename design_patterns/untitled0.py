@@ -72,3 +72,49 @@ all(tp.values())
 t=(1,2)
 t=t+(3,)
 t
+
+from collections import OrderedDict, Counter
+def uniqueLetterPositions(text):
+    c = OrderedDict()
+    for s in text:
+        if c.get(s):
+            c[s] +=1
+        else:
+            c[s]=1
+    l = []
+    for k, v in c.items():
+      if v==1 and k!=' ':
+        l.append(text.index(k))
+    return l
+
+  
+uniqueLetterPositions("infinite loop")
+
+
+def anagramCount(text, word):
+    count = 0
+    tln = len(text)
+    wln = len(word)
+    for i in range(tln-wln+1):
+      if Counter(text[i:i+wln]) == Counter(word):
+        count += 1
+    return count
+anagramCount('this is simon', 'is')
+
+
+
+import email.message, email.policy, email.utils, sys
+text="""Hello,
+This is a basic message from Vjiay Pal"""
+def main():
+    message = email.message.EmailMessage(email.policy.SMTP)
+    message['To'] = 'vipal045@gmail.com'
+    message['From'] = 'Test Sender <sender@example.com>'
+    message['Subject'] = 'Test Message Subject'
+    message['Date'] = email.utils.formatdate(localtime=True)
+    message['Message-ID'] = email.utils.make_msgid()
+    message.set_content(text)
+    sys.stdout.buffer.write(message.as_bytes())
+    
+if __name__ == '__main__':
+    main()
